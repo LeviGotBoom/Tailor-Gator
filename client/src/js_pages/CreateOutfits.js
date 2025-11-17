@@ -143,7 +143,7 @@ function CreateOutfitsPage() {
         minHeight: '100vh',
       }}
     >
-      {/*Full-Width Top Navigation Bar*/}
+      {/*Top Navigation*/}
       <nav
         className="shadow-sm"
         style={{
@@ -176,7 +176,9 @@ function CreateOutfitsPage() {
       {/*Main Content*/}
       <div className="container mt-3">
 
-        <h2 className="text-center mb-4" style={{ color: '#de798cff' }}>Your Wardrobe</h2>
+        <h2 className="text-center mb-4" style={{ color: '#de798cff' }}>
+          Your Wardrobe
+        </h2>
 
         {error && <div className="alert alert-danger">{error}</div>}
 
@@ -217,24 +219,39 @@ function CreateOutfitsPage() {
                     />
                   </label>
                 </div>
+
               </div>
             </div>
           </div>
         )}
 
-        {/*Item Grid*/}
+        {/*Wardrobe Grid*/}
         <div style={{ columnCount: 3, columnGap: '1rem' }}>
           {items.map((item) => (
-            <div key={item.id} style={{ breakInside: 'avoid', marginBottom: '1rem', position: 'relative', cursor: 'pointer' }}>
+            <div
+              key={item.id}
+              style={{
+                breakInside: 'avoid',
+                marginBottom: '1rem',
+                position: 'relative',
+                cursor: 'pointer',
+              }}
+            >
               <img
                 src={`${API_BASE}${item.imageUrl}`}
                 alt="clothing"
-                style={{ width: '100%', borderRadius: 8 }}
+                className="clothing-pic"
+                style={{ width: '100%' }}
                 onClick={() => setSelectedItem(item)}
               />
               <button
                 className="button-filled"
-                style={{ position: 'absolute', top: 8, right: 8, padding: '0.3rem 0.6rem' }}
+                style={{
+                  position: 'absolute',
+                  top: 8,
+                  right: 8,
+                  padding: '0.3rem 0.6rem',
+                }}
                 onClick={() => onDelete(item.id)}
               >
                 Delete
@@ -245,34 +262,47 @@ function CreateOutfitsPage() {
 
         {/*Modal*/}
         {selectedItem && (
-          <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}
-               onClick={() => setSelectedItem(null)}>
-            <div className="modal-dialog modal-lg" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="modal fade show"
+            style={{
+              display: 'block',
+              backgroundColor: 'rgba(0,0,0,0.5)',
+            }}
+            onClick={() => setSelectedItem(null)}
+          >
+            <div
+              className="modal-dialog modal-lg"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="modal-content">
 
                 <div className="modal-header">
                   <h5 className="modal-title">Item Details</h5>
-                  <button type="button" className="btn-close" onClick={() => setSelectedItem(null)} />
+                  <button className="btn-close" onClick={() => setSelectedItem(null)} />
                 </div>
 
                 <div className="modal-body">
-                  <img src={`${API_BASE}${selectedItem.imageUrl}`}
-                       alt="clothing"
-                       style={{ width: '100%', borderRadius: 8, marginBottom: '1rem' }} />
+                  <img
+                    src={`${API_BASE}${selectedItem.imageUrl}`}
+                    alt="clothing"
+                    className="clothing-pic"
+                    style={{ width: '100%', marginBottom: '1rem' }}
+                  />
 
                   {editingItem?.id === selectedItem.id ? (
                     <EditTagsForm
                       item={editingItem}
                       onChange={setEditingItem}
-                      onSave={() => onUpdateTags(editingItem.id, {
-                        item_type: editingItem.itemType,
-                        vibes: editingItem.vibes
-                      })}
+                      onSave={() =>
+                        onUpdateTags(editingItem.id, {
+                          item_type: editingItem.itemType,
+                          vibes: editingItem.vibes
+                        })
+                      }
                       onCancel={() => setEditingItem(null)}
                     />
                   ) : (
                     <div>
-
                       <div className="mb-3">
                         {selectedItem.itemType && (
                           <span className="tag me-2">{selectedItem.itemType}</span>
@@ -281,20 +311,26 @@ function CreateOutfitsPage() {
 
                       <div className="mb-3">
                         {(selectedItem.vibes || []).map((v) => (
-                          <span key={v} className="tag me-2 mb-2">{v}</span>
+                          <span key={v} className="tag me-2 mb-2">
+                            {v}
+                          </span>
                         ))}
                       </div>
 
-                      <button className="button-outline" onClick={() => setEditingItem({ ...selectedItem })}>
+                      <button
+                        className="button-outline"
+                        onClick={() => setEditingItem({ ...selectedItem })}
+                      >
                         Edit Tags
                       </button>
                     </div>
                   )}
-
                 </div>
 
                 <div className="modal-footer">
-                  <button type="button" className="button-outline" onClick={() => setSelectedItem(null)}>Close</button>
+                  <button className="button-outline" onClick={() => setSelectedItem(null)}>
+                    Close
+                  </button>
                 </div>
 
               </div>
@@ -304,6 +340,10 @@ function CreateOutfitsPage() {
 
         {/*Styles*/}
         <style>{`
+          .button, .button-outline, .button-filled {
+            text-decoration: none !important;
+          }
+
           .button {
             background-color: #fde2e4;
             border: none;
@@ -312,13 +352,13 @@ function CreateOutfitsPage() {
             border-radius: 25px;
             font-weight: 600;
             transition: all 0.3s ease;
-            text-decoration: none;
             box-shadow: 0 2px 5px rgba(255, 182, 193, 0.3);
           }
           .button:hover {
             background-color: #f9ccd3;
             color: #c85b75;
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
           }
 
           .button-outline {
@@ -333,6 +373,8 @@ function CreateOutfitsPage() {
           .button-outline:hover {
             background-color: #f5b3c4;
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(245, 179, 196, 0.4);
           }
 
           .button-filled {
@@ -342,6 +384,13 @@ function CreateOutfitsPage() {
             border-radius: 25px;
             padding: 0.45rem 1rem;
             font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(255, 182, 193, 0.3);
+          }
+          .button-filled:hover {
+            background-color: #e891a6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(245, 179, 196, 0.4);
           }
 
           .cute-select {
@@ -363,8 +412,18 @@ function CreateOutfitsPage() {
             font-size: 0.85rem;
             font-weight: 500;
           }
-        `}</style>
 
+          /* Pink framed clothing */
+          .clothing-pic {
+            border: 2.5px solid #f5b3c4;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+          }
+          .clothing-pic:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(245, 179, 196, 0.4);
+          }
+        `}</style>
       </div>
     </div>
   );
@@ -374,7 +433,9 @@ export default CreateOutfitsPage;
 
 /* Helpers */
 const ALL_VIBES = [
-  'casual','shoujo','vintage','formal','boho','chic','minimalist','preppy','streetwear','gothic','athleisure','grunge','y2k','acubi','coquette','cottagecore','fairycore','girly','edgy','country',
+  'casual','shoujo','vintage','formal','boho','chic','minimalist','preppy',
+  'streetwear','gothic','athleisure','grunge','y2k','acubi','coquette',
+  'cottagecore','fairycore','girly','edgy','country',
 ];
 
 function VibesPicker({ selected, onChange }) {
