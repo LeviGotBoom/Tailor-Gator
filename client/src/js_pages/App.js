@@ -245,49 +245,71 @@ function App() {
 
       {/* Styles */}
       <style>{`
-        .button {
-          background-color: #fde2e4;
-          border: none;
-          color: #d47b91;
-          padding: 0.5rem 1.1rem;
-          border-radius: 25px;
-          font-weight: 600;
-          transition: all 0.3s ease;
-          text-decoration: none;
-          box-shadow: 0 2px 5px rgba(255, 182, 193, 0.3);
-        }
-        .button:hover {
-          background-color: #f9ccd3;
-          color: #c85b75;
-        }
+      .button, .button-outline, .button-filled {
+        text-decoration: none !important;
+      }
 
-        .button-outline {
-          border: 2px solid #f5b3c4;
-          color: #de7990;
-          border-radius: 20px;
-          padding: 0.3rem 0.8rem;
-          font-weight: 500;
-          background: transparent;
-        }
+      .button {
+        background-color: #fde2e4;
+        border: none;
+        color: #d47b91;
+        padding: 0.5rem 1.1rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(255, 182, 193, 0.3);
+      }
+      .button:hover {
+        background-color: #f9ccd3;
+        color: #c85b75;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
+      }
 
-        .button-filled {
-          background-color: #f5b3c4;
-          color: white;
-          border-radius: 20px;
-          padding: 0.3rem 0.8rem;
-          font-weight: 500;
-        }
+      .button-outline {
+        border: 2px solid #f5b3c4;
+        color: #de7990;
+        border-radius: 20px;
+        padding: 0.3rem 0.8rem;
+        font-weight: 500;
+        background: transparent;
+        transition: all 0.3s ease;
+      }
+      .button-outline:hover {
+        background-color: #f5b3c4;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(245, 179, 196, 0.4);
+      }
 
-        .tag {
-          display: inline-block;
-          background-color: #f5b3c4;
-          color: white;
-          border-radius: 15px;
-          padding: 0.25rem 0.7rem;
-          font-size: 0.85rem;
-          font-weight: 500;
-        }
-      `}</style>
+      .button-filled {
+        background-color: #f5b3c4;
+        color: white;
+        border-radius: 20px;
+        padding: 0.3rem 0.8rem;
+        font-weight: 500;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(255, 182, 193, 0.3);
+      }
+      .button-filled:hover {
+        background-color: #e891a6;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(245, 179, 196, 0.4);
+      }
+
+      .tag {
+        display: inline-block;
+        background-color: #f5b3c4;
+        color: white;
+        border-radius: 15px;
+        padding: 0.25rem 0.7rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+    `}</style>
+
+        
     </div>
   );
 }
