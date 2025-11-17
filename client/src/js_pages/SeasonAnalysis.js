@@ -29,8 +29,17 @@ function SeasonAnalysisPage() {
   const s = SEASONS[season];
 
   return (
-    <div style={{ backgroundColor: '#fff0f6', minHeight: '100vh' }}>
-      {/* ===== Top Nav Bar ===== */}
+    <div
+      style={{
+        backgroundImage: "url('/background.jpg')",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh',
+      }}
+    >
+      {/*Top Nav Bar*/}
       <nav
         className="shadow-sm"
         style={{
@@ -52,13 +61,13 @@ function SeasonAnalysisPage() {
         </div>
       </nav>
 
-      {/* ===== Main Content ===== */}
+      {/*Main Content*/}
       <div className="container mt-4">
         <h2 className="text-center mb-4" style={{ color: '#de798cff' }}>
           Season Color Analysis
         </h2>
 
-        {/* ===== Season Selector ===== */}
+        {/*Season Selector*/}
         <div className="card mb-4" style={{ borderRadius: '20px', border: '1px solid #f5b3c4' }}>
           <div className="card-body text-center">
             <label className="form-label mb-3" style={{ color: '#d47b91', fontWeight: 600 }}>
@@ -79,7 +88,7 @@ function SeasonAnalysisPage() {
           </div>
         </div>
 
-        {/* ===== Season Details ===== */}
+        {/*Season Details*/}
         <div className="row g-4">
           <div className="col-md-4">
             <div
@@ -160,7 +169,7 @@ function SeasonAnalysisPage() {
         </div>
       </div>
 
-      {/* ===== Shared Styles ===== */}
+      {/*Shared Styles*/}
       <style>{`
         .button {
           background-color: #fde2e4;

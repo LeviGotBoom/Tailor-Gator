@@ -125,9 +125,20 @@ function CreateOutfitsPage() {
     }
   };
 
+
+  
   return (
-    <div style={{ backgroundColor: '#fff0f6', minHeight: '100vh' }}>
-      {/* ===== Full-Width Top Navigation Bar ===== */}
+    <div
+      style={{
+        backgroundImage: "url('/background.jpg')",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh',
+      }}
+    >
+      {/*Full-Width Top Navigation Bar*/}
       <nav
         className="shadow-sm"
         style={{
@@ -156,7 +167,7 @@ function CreateOutfitsPage() {
         </div>
       </nav>
 
-      {/* ===== Main Content ===== */}
+      {/*Main Content*/}
       <div className="container mt-3">
         <h2 className="text-center mb-4" style={{ color: '#de798cff' }}>Your Wardrobe</h2>
 
@@ -210,7 +221,7 @@ function CreateOutfitsPage() {
           </div>
         )}
 
-        {/* ===== Item Grid ===== */}
+        {/*Item Grid*/}
         <div style={{ columnCount: 3, columnGap: '1rem' }}>
           {items.map((item) => (
             <div key={item.id} style={{ breakInside: 'avoid', marginBottom: '1rem', position: 'relative', cursor: 'pointer' }}>
@@ -231,7 +242,7 @@ function CreateOutfitsPage() {
           ))}
         </div>
 
-        {/* ===== Modal for Item Details ===== */}
+        {/*Modal for Item Details*/}
         {selectedItem && (
           <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }} onClick={() => setSelectedItem(null)}>
             <div className="modal-dialog modal-lg" onClick={(e) => e.stopPropagation()}>
@@ -288,7 +299,7 @@ function CreateOutfitsPage() {
           </div>
         )}
 
-        {/* ===== Styles ===== */}
+        {/*Styles*/}
         <style>{`
           .button {
             background-color: #fde2e4;
@@ -383,7 +394,7 @@ function CreateOutfitsPage() {
 
 export default CreateOutfitsPage;
 
-/* --- Helpers --- */
+/*Helpers*/
 const ALL_VIBES = [
   'casual','shoujo','vintage','formal','boho','chic','minimalist','preppy','streetwear','gothic','athleisure','grunge','y2k','acubi','coquette','cottagecore','fairycore','girly','edgy','country',
 ];

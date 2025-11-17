@@ -2,7 +2,8 @@
 
 body {
   background-color: #fff0f6;
-  font-family: 'IBM Plex Sans', sans-serif;
+
+  font-family: 'Qilka', sans-serif;
 }
 
 /* ===== Pink Buttons ===== */
@@ -79,3 +80,6 @@ p, label, span, a {
   color: #fff;
   border-color: #d63384;
 }
+
+/* Font is loaded from public/index.html via %PUBLIC_URL% to avoid
+   css-loader attempting to resolve it during bundling. */

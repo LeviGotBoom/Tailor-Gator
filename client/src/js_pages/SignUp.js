@@ -53,7 +53,11 @@ function SignUpPage() {
   return (
     <div
       style={{
-        backgroundColor: '#fff0f6',
+        backgroundImage: "url('/background.jpg')",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
         minHeight: '100vh',
         display: 'flex',
         justifyContent: 'center',
@@ -144,7 +148,7 @@ function SignUpPage() {
         </div>
       </div>
 
-      {/* ===== Shared Styles ===== */}
+      {/*Shared Styles*/}
       <style>{`
         .button {
           background-color: #fde2e4;

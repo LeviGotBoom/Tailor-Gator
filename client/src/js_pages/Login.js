@@ -53,7 +53,11 @@ function LoginPage() {
   return (
     <div
       style={{
-        backgroundColor: '#fff0f6',
+        backgroundImage: "url('/background.jpg')",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
         minHeight: '100vh',
         display: 'flex',
         justifyContent: 'center',
@@ -129,7 +133,7 @@ function LoginPage() {
         </div>
       </div>
 
-      {/* ===== Shared Button + Input Styles ===== */}
+      {/*Shared button and input styles*/}
       <style>{`
         .button {
           background-color: #fde2e4;

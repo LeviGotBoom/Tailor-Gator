@@ -119,8 +119,17 @@ function OutfitAssemblerPage() {
   }, [items, generateOutfits]);
 
   return (
-    <div style={{ backgroundColor: '#fff0f6', minHeight: '100vh' }}>
-      {/* ===== Full-Width Top Navigation Bar ===== */}
+    <div
+      style={{
+        backgroundImage: "url('/background.jpg')",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh',
+      }}
+    >
+      {/*Full-Width Top Navigation Bar*/}
       <nav
         className="shadow-sm"
         style={{
@@ -145,7 +154,7 @@ function OutfitAssemblerPage() {
         </div>
       </nav>
 
-      {/* ===== Main Content ===== */}
+      {/*Main Content*/}
       <div className="container mt-3">
         <h2 className="text-center mb-4" style={{ color: '#de798cff' }}>Outfit Assembler</h2>
         {error && <div className="alert alert-danger text-center">{error}</div>}
@@ -199,7 +208,7 @@ function OutfitAssemblerPage() {
         )}
       </div>
 
-      {/* ===== Shared Styles ===== */}
+      {/*Shared Styles*/}
       <style>{`
         .button {
           background-color: #fde2e4;
