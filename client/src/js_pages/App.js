@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-/* API BASE same helper used in OutfitAssemblerPage */
+/* API BASE helper */
 function getApiBase() {
   const env = process.env.REACT_APP_API_BASE;
   if (env) return env;
@@ -25,12 +25,20 @@ function getAuthHeader() {
 
 const ITEM_TYPES = ['top', 'bottom', 'shoes', 'accessories'];
 
-/* MAIN APP COMPONENT WITH OUTFIT OF THE DAY */
 function App() {
   const [items, setItems] = React.useState([]);
   const [ootd, setOotd] = React.useState(null);
 
-  /* 1. Load items from backend */
+  /* Detect login status */
+  const isLoggedIn = Boolean(localStorage.getItem('token'));
+
+  /* Sign Out */
+  const handleSignOut = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  };
+
+  /* Load wardrobe items */
   React.useEffect(() => {
     const load = async () => {
       try {
@@ -47,7 +55,7 @@ function App() {
     load();
   }, []);
 
-  /* 2. Outfit Generator (same logic as assembler) */
+  /* Outfit generator */
   const generateOneOutfit = React.useCallback(() => {
     if (items.length === 0) return null;
 
@@ -65,6 +73,7 @@ function App() {
         vibeCounts.set(v, (vibeCounts.get(v) || 0) + 1)
       );
     }
+
     const allVibes = Array.from(vibeCounts.keys());
 
     const pickVibe = () => {
@@ -81,6 +90,7 @@ function App() {
 
     const vibe = pickVibe();
     const outfit = [];
+
     for (const type of ITEM_TYPES) {
       const pool = byType[type];
       if (!pool.length) continue;
@@ -99,7 +109,7 @@ function App() {
     return { vibe, items: outfit };
   }, [items]);
 
-  /* 3. Generate Outfit of the Day */
+  /* Generate OOTD */
   React.useEffect(() => {
     if (items.length > 0) {
       let o = null;
@@ -112,7 +122,6 @@ function App() {
     }
   }, [items, generateOneOutfit]);
 
-  /* PAGE RETURN */
   return (
     <div
       style={{
@@ -124,7 +133,8 @@ function App() {
         minHeight: '100vh',
       }}
     >
-      {/* Nav Bar */}
+
+      {/* Navigation Bar */}
       <nav
         className="navbar navbar-expand-lg shadow-sm"
         style={{
@@ -133,6 +143,8 @@ function App() {
         }}
       >
         <div className="container-fluid d-flex justify-content-between align-items-center">
+
+          {/* Left navigation links */}
           <div className="d-flex align-items-center gap-2 flex-wrap">
             <Link to="/" className="button">Home</Link>
             <Link to="/create" className="button">Wardrobe</Link>
@@ -140,14 +152,22 @@ function App() {
             <Link to="/season" className="button">Season Analysis</Link>
           </div>
 
-          <div className="d-flex gap-2">
-            <Link to="/login" className="button-outline">Log In</Link>
-            <Link to="/signup" className="button-filled">Create Account</Link>
-          </div>
+          {/* Right side: Login + Signup OR Sign Out */}
+          {isLoggedIn ? (
+            <button className="button-filled" onClick={handleSignOut}>
+              Sign Out
+            </button>
+          ) : (
+            <div className="d-flex gap-2">
+              <Link to="/login" className="button-outline">Log In</Link>
+              <Link to="/signup" className="button-filled">Create Account</Link>
+            </div>
+          )}
+
         </div>
       </nav>
 
-      {/* Main */}
+      {/* Main Welcome Section */}
       <div className="container mt-4 text-center">
 
         <h1
@@ -174,7 +194,7 @@ function App() {
           Outfit inspiration tailored just for you.
         </p>
 
-        {/* OOTD Card */}
+        {/* Outfit of the Day */}
         {ootd && (
           <div className="d-flex justify-content-center mt-5">
             <div
@@ -218,19 +238,17 @@ function App() {
                       <img
                         src={`${API_BASE}${it.imageUrl}`}
                         alt=""
-                        style={{ width: '100%', borderRadius: 8 }}
-                        onError={(e) => {
-                          e.target.src =
-                            'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%23ddd" width="100" height="100"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23999"%3ENo Image%3C/text%3E%3C/svg%3E';
+                        style={{
+                          width: '100%',
+                          borderRadius: 8,
+                          border: '2.5px solid #f5b3c4',
                         }}
                       />
-
                       <div className="mt-2 d-flex flex-wrap justify-content-center gap-1">
                         {it.itemType && <span className="tag">{it.itemType}</span>}
                         {(it.vibes || []).map((v) => (
                           <span key={`${it.id}-${v}`} className="tag">{v}</span>
                         ))}
-                        {/* ❌ removed color tag completely */}
                       </div>
                     </div>
                   ))}
@@ -309,7 +327,6 @@ function App() {
       }
     `}</style>
 
-        
     </div>
   );
 }
